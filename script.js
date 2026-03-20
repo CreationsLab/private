@@ -79,23 +79,23 @@ const wheelWrap = document.getElementById('wheelWrap');
 let rockTick = 0;
 
 function rockAnimation() {
-    rockTick += 0.008; // controls overall speed of the rocking
+    rockTick += 0.008; // overall speed
 
-    // --- Text rocking ---
-    const contentRock = Math.sin(rockTick * 0.9) * 3  // more rotation
-        + Math.sin(rockTick * 0.5 + 0.5) * 1;       // add secondary sway
+    // --- Text rocking (slightly less) ---
+    const contentRock = Math.sin(rockTick * 0.9) * 2   // reduced rotation
+        + Math.sin(rockTick * 0.5 + 0.5) * 0.5;       // secondary sway smaller
 
-    const contentBob = Math.sin(rockTick * 0.9 + 1.0) * 5 // slightly higher bob
-        + Math.sin(rockTick * 0.4) * 2;
+    const contentBob = Math.sin(rockTick * 0.9 + 1.0) * 3  // reduced vertical bob
+        + Math.sin(rockTick * 0.4) * 1;
 
     heroContent.style.transform =
         `rotate(${contentRock}deg) translateY(${contentBob}px)`;
 
     // --- Wheel independent spinning ---
-    const wheelRock = Math.sin(rockTick * 0.4 + 0.3) * 6  // bigger rotation
+    const wheelRock = Math.sin(rockTick * 0.4 + 0.3) * 6  // big wheel rotation
         + Math.sin(rockTick * 0.2 + 1.2) * 2;            // secondary sway
 
-    const wheelBob = Math.sin(rockTick * 0.8 + 0.8) * 4   // keep some vertical bob
+    const wheelBob = Math.sin(rockTick * 0.8 + 0.8) * 4
         + Math.sin(rockTick * 0.3 + 0.2) * 2;
 
     wheelWrap.style.transform =
