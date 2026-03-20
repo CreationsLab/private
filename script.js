@@ -75,36 +75,31 @@ animate();
 
 const heroContent = document.getElementById('heroContent');
 const wheelWrap = document.getElementById('wheelWrap');
-const shipWheel = document.getElementById('shipWheel');
 
 let rockTick = 0;
-let spinTick = 0;
 
 function rockAnimation() {
-    rockTick += 0.008;
-    spinTick += 0.12; // wheel spins more
+    rockTick += 0.008; // controls overall speed of the rocking
 
-    // text rocks way less
-    const contentRock = Math.sin(rockTick) * 0.3
-        + Math.sin(rockTick * 0.6 + 0.5) * 0.1;
+    // --- Text rocking ---
+    const contentRock = Math.sin(rockTick * 0.9) * 3  // more rotation
+        + Math.sin(rockTick * 0.5 + 0.5) * 1;       // add secondary sway
 
-    const contentBob = Math.sin(rockTick * 0.9 + 1.0) * 0.4
-        + Math.sin(rockTick * 0.4) * 0.2;
+    const contentBob = Math.sin(rockTick * 0.9 + 1.0) * 5 // slightly higher bob
+        + Math.sin(rockTick * 0.4) * 2;
 
     heroContent.style.transform =
         `rotate(${contentRock}deg) translateY(${contentBob}px)`;
 
-    // wheel rocks a little, but spins independently
-    const wheelRock = Math.sin(rockTick * 0.7 + 0.3) * 0.8
-        + Math.sin(rockTick * 0.35 + 1.2) * 0.25;
+    // --- Wheel independent spinning ---
+    const wheelRock = Math.sin(rockTick * 0.4 + 0.3) * 6  // bigger rotation
+        + Math.sin(rockTick * 0.2 + 1.2) * 2;            // secondary sway
 
-    const wheelBob = Math.sin(rockTick * 0.8 + 0.8) * 0.8
-        + Math.sin(rockTick * 0.3 + 0.2) * 0.3;
+    const wheelBob = Math.sin(rockTick * 0.8 + 0.8) * 4   // keep some vertical bob
+        + Math.sin(rockTick * 0.3 + 0.2) * 2;
 
     wheelWrap.style.transform =
         `translate(-50%, -50%) rotate(${wheelRock}deg) translateY(${wheelBob}px)`;
-
-    shipWheel.style.transform = `rotate(${spinTick}deg)`;
 
     requestAnimationFrame(rockAnimation);
 }
