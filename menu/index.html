@@ -1,67 +1,1753 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Menu</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #f5f5f5;
-    }
-    canvas {
-      display: block;
-      width: 100vw;
-      height: 100vh;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu | New York Seafood Market</title>
+    <link rel="icon" href="https://i.imgur.com/BHbBRHo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --brown: #3E2723;
+            --brown-dark: #2C1A12;
+            --blue: #1565C0;
+            --blue-dark: #0D47A1;
+            --blue-light: #1E88E5;
+            --orange: #E65100;
+            --orange-light: #FF8F00;
+            --yellow: #FFB300;
+            --cream: #FFF8E1;
+            --cream-dark: #F5E6C8;
+            --white: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.18);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #222;
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(44, 26, 18, 0.97);
+            backdrop-filter: blur(8px);
+            border-bottom: 3px solid var(--orange);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 68px;
+            padding: 0 2rem;
+        }
+
+        .nav-logo img {
+            height: 52px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.3rem;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 0.45rem 0.9rem;
+            border-radius: 5px;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            background: var(--orange);
+            color: var(--white);
+        }
+
+        .nav-links a.reserve-btn {
+            background: var(--orange);
+            color: var(--white);
+        }
+
+        .nav-links a.reserve-btn:hover {
+            background: var(--orange-light);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 26px;
+            height: 2.5px;
+            background: var(--cream);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ── HERO BANNER ── */
+        .menu-hero {
+            background: linear-gradient(160deg, var(--brown-dark) 0%, #3a2218 45%, var(--blue-dark) 100%);
+            padding: 7rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .menu-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 0.6rem;
+            text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+        }
+
+        .menu-hero h1 span {
+            color: var(--yellow);
+        }
+
+        .menu-hero p {
+            color: rgba(255,248,225,0.7);
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        /* ── STICKY TAB BAR ── */
+        .tab-bar-wrap {
+            position: sticky;
+            top: 68px;
+            z-index: 900;
+            background: var(--brown-dark);
+            border-bottom: 3px solid var(--orange);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .tab-bar-wrap::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-bar {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            gap: 0;
+            white-space: nowrap;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: rgba(255,248,225,0.65);
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            padding: 1rem 1.1rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -3px;
+            flex-shrink: 0;
+        }
+
+        .tab-btn:hover {
+            color: var(--yellow);
+        }
+
+        .tab-btn.active {
+            color: var(--yellow);
+            border-bottom-color: var(--yellow);
+        }
+
+        /* ── MENU BODY ── */
+        .menu-body {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem 5rem;
+        }
+
+        /* ── MENU PANEL ── */
+        .menu-panel {
+            display: none;
+        }
+
+        .menu-panel.active {
+            display: block;
+        }
+
+        /* ── PANEL HEADER ── */
+        .panel-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .panel-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--brown);
+        }
+
+        .panel-header .underline {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--orange), var(--yellow));
+            margin: 0.7rem auto 0.9rem;
+            border-radius: 2px;
+        }
+
+        .panel-header p {
+            color: #777;
+            font-size: 0.95rem;
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ── SECTION BLOCK ── */
+        .menu-section-block {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: var(--white);
+            background: linear-gradient(135deg, var(--brown), var(--brown-dark));
+            padding: 0.75rem 1.4rem;
+            border-radius: 8px 8px 0 0;
+            border-left: 4px solid var(--orange);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .section-title .section-icon {
+            font-size: 1.1rem;
+        }
+
+        /* ── SECTION NOTE ── */
+        .section-note {
+            background: #fff3e0;
+            border: 1px solid var(--orange);
+            border-top: none;
+            padding: 0.75rem 1.4rem;
+            font-size: 0.88rem;
+            color: var(--brown);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-note svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            stroke: var(--orange);
+        }
+
+        /* ── ITEMS GRID ── */
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1px;
+            background: #e8ddd0;
+            border: 1px solid #e8ddd0;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+        }
+
+        /* ── ITEM CARD ── */
+        .item-card {
+            background: var(--white);
+            padding: 1.1rem 1.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            transition: background 0.2s ease;
+            position: relative;
+        }
+
+        .item-card:hover {
+            background: #fffdf7;
+        }
+
+        .item-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .item-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--brown);
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        .item-price {
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: var(--orange);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .item-variant {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--white);
+            background: var(--blue-dark);
+            display: inline-block;
+            padding: 0.15rem 0.55rem;
+            border-radius: 3px;
+            width: fit-content;
+        }
+
+        .item-note {
+            font-size: 0.8rem;
+            color: #888;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        /* ── SAUCE GRID ── */
+        .sauce-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1px;
+            background: #e8ddd0;
+            border: 1px solid #e8ddd0;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+        }
+
+        .sauce-card {
+            background: var(--white);
+            padding: 1rem 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: background 0.2s ease;
+        }
+
+        .sauce-card:hover {
+            background: #fffdf7;
+        }
+
+        .sauce-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--orange), var(--yellow));
+            flex-shrink: 0;
+        }
+
+        .sauce-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--brown);
+        }
+
+        .sauce-note {
+            font-size: 0.78rem;
+            color: #999;
+            font-style: italic;
+            margin-left: auto;
+        }
+
+        /* ── HEAT BADGE ── */
+        .heat-row {
+            background: var(--white);
+            padding: 1rem 1.3rem;
+            border-top: 1px solid #e8ddd0;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        .heat-label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--brown);
+        }
+
+        .heat-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.65rem;
+            border-radius: 20px;
+            color: var(--white);
+        }
+
+        .heat-mild   { background: #43A047; }
+        .heat-medium { background: #FB8C00; }
+        .heat-spicy  { background: #E53935; }
+        .heat-xtra   { background: #6A1A1A; }
+
+        /* ── COMBO PICK ── */
+        .combo-card {
+            background: var(--white);
+            border: 1px solid #e8ddd0;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 1.4rem 1.6rem;
+        }
+
+        .combo-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .combo-top h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--brown);
+        }
+
+        .combo-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--orange);
+        }
+
+        .combo-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .combo-option {
+            background: var(--cream);
+            border: 1px solid var(--cream-dark);
+            color: var(--brown);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.3rem 0.75rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .combo-option:hover {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: var(--white);
+        }
+
+        /* ── BEVERAGES ── */
+        .bev-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1px;
+            background: #e8ddd0;
+            border: 1px solid #e8ddd0;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+        }
+
+        .bev-card {
+            background: var(--white);
+            padding: 1.1rem 1.3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.2s ease;
+        }
+
+        .bev-card:hover {
+            background: #fffdf7;
+        }
+
+        .bev-name {
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: var(--brown);
+        }
+
+        .bev-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.2rem;
+        }
+
+        .bev-price {
+            font-weight: 800;
+            font-size: 0.92rem;
+            color: var(--orange);
+            white-space: nowrap;
+        }
+
+        .bev-refill {
+            font-size: 0.72rem;
+            color: #43A047;
+            font-weight: 700;
+            background: #e8f5e9;
+            padding: 0.1rem 0.45rem;
+            border-radius: 3px;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--brown-dark);
+            padding: 4rem 2rem 0;
+        }
+
+        .footer-container {
+            max-width: 1080px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .footer-logo {
+            height: 60px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .footer-links h4,
+        .footer-contact h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: var(--yellow);
+            margin-bottom: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--orange);
+            padding-left: 4px;
+        }
+
+        .footer-contact p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+            line-height: 1.9;
+        }
+
+        .footer-contact a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            transition: color 0.25s ease;
+        }
+
+        .footer-contact a:hover {
+            color: var(--orange);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 1.3rem 2rem;
+            color: rgba(255,255,255,0.28);
+            font-size: 0.8rem;
+        }
+
+        /* ── BACK TO TOP ── */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            background: var(--orange);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 14px rgba(230,81,0,0.4);
+            transition: all 0.25s ease;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 800;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .back-to-top:hover {
+            background: var(--orange-light);
+            transform: translateY(-3px);
+        }
+
+        .back-to-top svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--white);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 62%;
+                height: 100vh;
+                background: var(--brown-dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 1.4rem;
+                transition: right 0.35s ease;
+                border-left: 2px solid var(--orange);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 0.95rem;
+            }
+
+            .menu-hero h1 {
+                font-size: 2rem;
+            }
+
+            .tab-btn {
+                font-size: 0.72rem;
+                padding: 0.85rem 0.85rem;
+            }
+
+            .items-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sauce-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bev-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .footer-logo {
+                margin: 0 auto 1rem;
+            }
+
+            .footer-links a:hover {
+                padding-left: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
+            }
+
+            .combo-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 <body>
-  <canvas id="menu-canvas"></canvas>
-  <script>
-    const canvas = document.getElementById('menu-canvas');
-    const ctx = canvas.getContext('2d');
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.src = 'https://i.imgur.com/gyvzFPy.png';
 
-    img.onload = () => {
-      const lowResWidth = 300;
-      const lowResHeight = 450;
-      const tempCanvas = document.createElement('canvas');
-      tempCanvas.width = lowResWidth;
-      tempCanvas.height = lowResHeight;
-      const tempCtx = tempCanvas.getContext('2d');
+<!-- ── NAV ── -->
+<nav id="navbar">
+    <div class="nav-container">
+        <a href="/" class="nav-logo">
+            <img src="https://i.imgur.com/BHbBRHo.png" alt="New York Seafood Market">
+        </a>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/">Home</a></li>
+            <li><a href="/#about">About</a></li>
+            <li><a href="/menu" class="active-link">Menu</a></li>
+            <li><a href="/#hours">Hours</a></li>
+            <li><a href="/#location">Location</a></li>
+            <li><a href="/#reserve" class="reserve-btn">Reserve</a></li>
+        </ul>
+    </div>
+</nav>
 
-      tempCtx.filter = 'blur(0.5px)';
-      tempCtx.drawImage(img, 0, 0, lowResWidth, lowResHeight);
+<!-- ── HERO BANNER ── -->
+<div class="menu-hero">
+    <h1>Our <span>Full Menu</span></h1>
+    <p>New York Seafood Market &nbsp;·&nbsp; St. Petersburg, FL</p>
+</div>
 
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      ctx.imageSmoothingEnabled = true;
-      ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
+<!-- ── STICKY TAB BAR ── -->
+<div class="tab-bar-wrap" id="tabBarWrap">
+    <div class="tab-bar">
+        <button class="tab-btn active" data-tab="seafood1">🦐 Seafood Menu</button>
+        <button class="tab-btn" data-tab="crabtrays">🦀 Crab &amp; Seafood Trays</button>
+        <button class="tab-btn" data-tab="chinese">🥡 Chinese Food</button>
+        <button class="tab-btn" data-tab="beverages">🍟 Fried &amp; Drinks</button>
+    </div>
+</div>
+
+<!-- ── MENU BODY ── -->
+<main class="menu-body">
+
+    <!-- ════════════════════════════════════════
+         TAB 1 · SEAFOOD MENU 1
+    ════════════════════════════════════════ -->
+    <div class="menu-panel active" id="tab-seafood1">
+
+        <div class="panel-header">
+            <h2>Seafood Menu</h2>
+            <div class="underline"></div>
+            <p>Sides, seafood add-ons, specials, and your choice of sauce &amp; heat level.</p>
+        </div>
+
+        <!-- SIDES -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🥔</span> Sides
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Corn</span><span class="item-price">$2.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Potato</span><span class="item-price">$2.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Sausage</span><span class="item-price">$3.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Eggs</span><span class="item-price">$3.00</span></div>
+                    <span class="item-note">2 for $3.00</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Broccoli</span><span class="item-price">$3.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Mushrooms</span><span class="item-price">$2.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Peanuts</span><span class="item-price">$4.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">French Fries</span><span class="item-price">$3.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Smoked Neckbones</span><span class="item-price">$4.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Rice</span><span class="item-price">$2.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Ramen</span><span class="item-price">$2.50</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEAFOOD ADD ON -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🦞</span> Seafood Add-Ons
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Shrimp</span><span class="item-price">$9.00</span></div>
+                    <span class="item-note">1/2 lb</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Green Mussel</span><span class="item-price">$10.00</span></div>
+                    <span class="item-note">1/2 lb</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Black Mussel</span><span class="item-price">$9.00</span></div>
+                    <span class="item-note">1/2 lb</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Crawfish</span><span class="item-price">$9.00</span></div>
+                    <span class="item-note">1/2 lb</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Baby Clams</span><span class="item-price">$10.00</span></div>
+                    <span class="item-note">1 lb</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Snow Crabs</span><span class="item-price">$15.00</span></div>
+                    <span class="item-note">1/2 lb</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Dungeness</span><span class="item-price">$25.00</span></div>
+                    <span class="item-note">1/2 lb</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Conch Meat</span><span class="item-price">$15.00</span></div>
+                    <span class="item-note">1/2 lb</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Lobster Tail</span><span class="item-price">$18.00</span></div>
+                    <span class="item-note">5–6 oz, each</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIDE SPECIALS -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">⭐</span> Side Specials
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Andy Special</span><span class="item-price">$15.00</span></div>
+                    <span class="item-note">4 sausages, 2 corns and 2 potatoes</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Peanut Tray</span><span class="item-price">$18.00</span></div>
+                    <span class="item-note">Peanuts, 5 shrimps, potato, sausage, corn and egg</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Lynn's Special</span><span class="item-price">$10.00</span></div>
+                    <span class="item-variant">Regular</span>
+                    <span class="item-note">Neckbones, 3 shrimps, potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Lynn's Special</span><span class="item-price">$16.00</span></div>
+                    <span class="item-variant">Large</span>
+                    <span class="item-note">Neckbones, 3 shrimps, potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Large Neckbone Tray</span><span class="item-price">$15.95</span></div>
+                    <span class="item-note">Neckbones, potato, sausage and corn</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Daily Special #1</span><span class="item-price">$12.00</span></div>
+                    <span class="item-note">Neckbones, 3 shrimps, BLACK mussels, potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Daily Special #2</span><span class="item-price">$16.00</span></div>
+                    <span class="item-note">Neckbones, 3 shrimps, GREEN mussels, potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Ramen #1</span><span class="item-price">$7.00</span></div>
+                    <span class="item-note">Ramen, 3 shrimps and 1 egg</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Ramen #2</span><span class="item-price">$12.00</span></div>
+                    <span class="item-note">Ramen, neckbones, egg, potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Happy Tray #1</span><span class="item-price">$14.00</span></div>
+                    <span class="item-note">Neckbones, 3 shrimps, 4 eggs, potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Happy Tray #2</span><span class="item-price">$10.00</span></div>
+                    <span class="item-note">4 eggs, potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Happy Tray #3</span><span class="item-price">$8.00</span></div>
+                    <span class="item-note">Peanuts, 2 eggs and potato</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Happy Tray #4</span><span class="item-price">$8.00</span></div>
+                    <span class="item-note">3 Wings, potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Happy Tray #5</span><span class="item-price">$8.00</span></div>
+                    <span class="item-note">Broccoli, egg, potato and sausage</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEAFOOD SAUCE -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🧄</span> Seafood Sauces
+            </div>
+            <div class="sauce-grid">
+                <div class="sauce-card">
+                    <div class="sauce-dot"></div>
+                    <span class="sauce-name">Garlic Butter</span>
+                </div>
+                <div class="sauce-card">
+                    <div class="sauce-dot"></div>
+                    <span class="sauce-name">Cajun Butter</span>
+                </div>
+                <div class="sauce-card">
+                    <div class="sauce-dot"></div>
+                    <span class="sauce-name">Garlic Lemon Pepper</span>
+                </div>
+                <div class="sauce-card">
+                    <div class="sauce-dot"></div>
+                    <span class="sauce-name">Garlic and Onion Butter</span>
+                </div>
+                <div class="sauce-card">
+                    <div class="sauce-dot"></div>
+                    <span class="sauce-name">Creamy Garlic Butter</span>
+                </div>
+                <div class="sauce-card">
+                    <div class="sauce-dot"></div>
+                    <span class="sauce-name">House Sauce</span>
+                    <span class="sauce-note">All sauces mixed</span>
+                </div>
+            </div>
+            <div class="heat-row">
+                <span class="heat-label">Heat Level:</span>
+                <span class="heat-badge heat-mild">Mild</span>
+                <span class="heat-badge heat-medium">Medium</span>
+                <span class="heat-badge heat-spicy">Spicy</span>
+                <span class="heat-badge heat-xtra">Xtra Spicy</span>
+            </div>
+        </div>
+
+    </div><!-- end tab-seafood1 -->
+
+
+    <!-- ════════════════════════════════════════
+         TAB 2 · CRAB & SEAFOOD TRAYS
+    ════════════════════════════════════════ -->
+    <div class="menu-panel" id="tab-crabtrays">
+
+        <div class="panel-header">
+            <h2>Crab &amp; Seafood Trays</h2>
+            <div class="underline"></div>
+            <p>Snow crab clusters, Dungeness crab, shrimp trays, and more — all served with your choice of sauce.</p>
+        </div>
+
+        <!-- SNOW CRAB TRAYS -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">❄️</span> Snow Crab Trays
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Snowcrab Cluster Tray</span><span class="item-price">$13.00</span></div>
+                    <span class="item-variant">Small</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Snowcrab Cluster Tray</span><span class="item-price">$16.95</span></div>
+                    <span class="item-variant">Medium</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Snowcrab Cluster Tray</span><span class="item-price">$19.95</span></div>
+                    <span class="item-variant">Large</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">2 Snowcrab Cluster Tray</span><span class="item-price">$23.95</span></div>
+                    <span class="item-variant">Small</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">2 Snowcrab Cluster Tray</span><span class="item-price">$28.95</span></div>
+                    <span class="item-variant">Medium</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">2 Snowcrab Cluster Tray</span><span class="item-price">$33.95</span></div>
+                    <span class="item-variant">Large</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">3 Snowcrab Cluster Tray</span><span class="item-price">$34.00</span></div>
+                    <span class="item-variant">Small</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">3 Snowcrab Cluster Tray</span><span class="item-price">$40.00</span></div>
+                    <span class="item-variant">Medium</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">3 Snowcrab Cluster Tray</span><span class="item-price">$46.00</span></div>
+                    <span class="item-variant">Large</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">4 Snowcrab Cluster Tray</span><span class="item-price">$50.00</span></div>
+                    <span class="item-variant">Small / Medium</span>
+                    <span class="item-note">Also includes 2 eggs and corn</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">4 Snowcrab Cluster Tray</span><span class="item-price">$60.00</span></div>
+                    <span class="item-variant">Large</span>
+                    <span class="item-note">Also includes 2 eggs and corn</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">6 Snowcrab Cluster Tray</span><span class="item-price">$70.00</span></div>
+                    <span class="item-variant">Small / Medium</span>
+                    <span class="item-note">Also includes broccoli</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">6 Snowcrab Cluster Tray</span><span class="item-price">$85.00</span></div>
+                    <span class="item-variant">Large</span>
+                    <span class="item-note">Also includes broccoli</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">New York Special</span><span class="item-price">$75.00</span></div>
+                    <span class="item-note">1/2 lb Snowcrab cluster, 1/2 lb Dungeness crab, 1/2 lb shrimp, 1/2 lb green mussels, 1 lobster tail and 1 corn</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Seafood Combo</span><span class="item-price">$30.00</span></div>
+                    <span class="item-note">1 Snowcrab cluster, 8 pcs black mussels, 4 pcs green mussels and 5 shrimp</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Snowcrab &amp; Shrimp #1</span><span class="item-price">$20.00</span></div>
+                    <span class="item-note">1 Snowcrab cluster, 5 shrimp with corn, potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Snowcrab &amp; Shrimp #2</span><span class="item-price">$38.00</span></div>
+                    <span class="item-note">2 Snowcrab clusters, 10 shrimps with 2 corn, 2 potatoes and 2 sausages</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Snowcrab &amp; Lobster</span><span class="item-price">$32.00</span></div>
+                    <span class="item-note">1 Snowcrab cluster, 1 lobster tail with potato and sausage</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DUNGENESS CRAB TRAY -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🦀</span> Dungeness Crab Trays
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">DC 1</span><span class="item-price">$35.00</span></div>
+                    <span class="item-note">1/2 lb Dungeness crab and 1/2 lb shrimp; includes corn, potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">DC 2</span><span class="item-price">$40.00</span></div>
+                    <span class="item-note">1/2 lb Dungeness crab, 1/2 lb shrimp and 1/2 lb black mussels; includes corn, potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">DC 3</span><span class="item-price">$50.00</span></div>
+                    <span class="item-note">1/2 lb Dungeness crab, 1 lobster tail and 1/2 lb shrimp; includes corn, potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">DC 4</span><span class="item-price">$60.00</span></div>
+                    <span class="item-note">1 lb Dungeness crab and 1/2 lb shrimp; includes corn, potato and sausage</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEAFOOD TRAY -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🍤</span> Seafood Trays
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Shrimp Tray</span><span class="item-price">$10.00</span></div>
+                    <span class="item-variant">10 pcs</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Shrimp Tray</span><span class="item-price">$17.95</span></div>
+                    <span class="item-variant">20 pcs</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Green Mussel Tray</span><span class="item-price">$12.00</span></div>
+                    <span class="item-variant">7 pcs</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Green Mussel Tray</span><span class="item-price">$16.95</span></div>
+                    <span class="item-variant">12 pcs</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Black Mussel Tray</span><span class="item-price">$10.00</span></div>
+                    <span class="item-variant">1/2 lb</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Shrimp + Mussel Tray</span><span class="item-price">$12.00</span></div>
+                    <span class="item-variant">Regular</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Shrimp + Mussel Tray</span><span class="item-price">$22.00</span></div>
+                    <span class="item-variant">Large</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Crawfish Tray</span><span class="item-price">$12.00</span></div>
+                    <span class="item-variant">1/2 lb</span>
+                    <span class="item-note">Includes potato and sausage</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Lobster Tail Tray</span><span class="item-price">$28.00</span></div>
+                    <span class="item-note">Includes 1 lobster tail, 5 shrimp, 1 egg, 2 sausages, corn and potato</span>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- end tab-crabtrays -->
+
+
+    <!-- ════════════════════════════════════════
+         TAB 3 · CHINESE FOOD MENU
+    ════════════════════════════════════════ -->
+    <div class="menu-panel" id="tab-chinese">
+
+        <div class="panel-header">
+            <h2>Chinese Food Menu</h2>
+            <div class="underline"></div>
+            <p>Fresh made-to-order Chinese dishes — stir fry, fried rice, lo mein, and more.</p>
+        </div>
+
+        <!-- APPETIZERS -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🥟</span> Appetizers
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Crab Rangoons</span><span class="item-price">$5.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Wings</span><span class="item-price">$9.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Eggrolls</span><span class="item-price">$5.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Fried Dumpling</span><span class="item-price">$6.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Fried Wonton</span><span class="item-price">$6.00</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SOUP -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🍜</span> Soup
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Egg Drop Soup</span><span class="item-price">$5.00</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STIR FRY -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🥢</span> Stir Fry and More
+            </div>
+            <div class="section-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Served with steamed rice. Add Fried Rice for an additional $4.00.
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Shrimp Broccoli</span><span class="item-price">$8.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Beef Broccoli</span><span class="item-price">$10.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Chicken Broccoli</span><span class="item-price">$8.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Pepper Steak</span><span class="item-price">$10.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Mixed Vegetable</span><span class="item-price">$8.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Sweet and Sour Chicken</span><span class="item-price">$8.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Sweet and Sour Shrimp</span><span class="item-price">$10.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">General Tso Chicken</span><span class="item-price">$8.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Curry Chicken</span><span class="item-price">$8.00</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMBINATIONS -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🍱</span> Combinations
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">General Tso Chicken &amp; Shrimp Fried Rice</span><span class="item-price">$14.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Teriyaki Chicken &amp; Shrimp Fried Rice</span><span class="item-price">$14.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Wings &amp; Shrimp Fried Rice</span><span class="item-price">$14.00</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FRIED RICE -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🍚</span> Fried Rice
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Egg Fried Rice</span><span class="item-price">$8.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Vegetable Fried Rice</span><span class="item-price">$9.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Chicken Fried Rice</span><span class="item-price">$9.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Shrimp Fried Rice</span><span class="item-price">$9.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Beef Fried Rice</span><span class="item-price">$9.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">House Fried Rice</span><span class="item-price">$15.95</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LO MEIN -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🍝</span> Lo Mein
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Egg Lo Mein</span><span class="item-price">$8.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Vegetable Lo Mein</span><span class="item-price">$9.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Chicken Lo Mein</span><span class="item-price">$9.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Shrimp Lo Mein</span><span class="item-price">$9.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Beef Lo Mein</span><span class="item-price">$9.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">House Lo Mein</span><span class="item-price">$15.95</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMBO PICK 3 -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🎯</span> Combination — Pick 3
+            </div>
+            <div class="combo-card">
+                <div class="combo-top">
+                    <h3>Pick Any 3 Items</h3>
+                    <span class="combo-price">$20.99</span>
+                </div>
+                <div class="combo-options">
+                    <span class="combo-option">Pepper Steak</span>
+                    <span class="combo-option">Sweet &amp; Sour Chicken</span>
+                    <span class="combo-option">Mixed Vegetable Stir Fry</span>
+                    <span class="combo-option">Fried Rice</span>
+                    <span class="combo-option">Lo Mein</span>
+                    <span class="combo-option">Wings (4)</span>
+                    <span class="combo-option">Chicken Broccoli</span>
+                    <span class="combo-option">Beef Broccoli</span>
+                    <span class="combo-option">Sweet &amp; Sour Shrimp</span>
+                    <span class="combo-option">General Tso Chicken</span>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- end tab-chinese -->
+
+
+    <!-- ════════════════════════════════════════
+         TAB 4 · BEVERAGES & FRIED MENU
+    ════════════════════════════════════════ -->
+    <div class="menu-panel" id="tab-beverages">
+
+        <div class="panel-header">
+            <h2>Beverages &amp; Fried Menu</h2>
+            <div class="underline"></div>
+            <p>Drinks, appetizers, soups, salads, pasta, fried fish, and sandwiches.</p>
+        </div>
+
+        <!-- BEVERAGES -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🥤</span> Beverages
+            </div>
+            <div class="bev-grid">
+                <div class="bev-card">
+                    <span class="bev-name">Regular Lemonade</span>
+                    <div class="bev-right">
+                        <span class="bev-price">$3.50</span>
+                        <span class="bev-refill">Free Refill</span>
+                    </div>
+                </div>
+                <div class="bev-card">
+                    <span class="bev-name">Flavored Lemonade</span>
+                    <div class="bev-right">
+                        <span class="bev-price">$4.50</span>
+                        <span class="bev-refill">Free Refill</span>
+                    </div>
+                </div>
+                <div class="bev-card">
+                    <span class="bev-name">Iced Tea</span>
+                    <div class="bev-right">
+                        <span class="bev-price">$3.50</span>
+                        <span class="bev-refill">Free Refill</span>
+                    </div>
+                </div>
+                <div class="bev-card">
+                    <span class="bev-name">Can Soda</span>
+                    <div class="bev-right">
+                        <span class="bev-price">$2.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- APPETIZERS -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🍗</span> Appetizers
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Chicken Tenders</span><span class="item-price">$8.99</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Wings</span><span class="item-price">$9.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Mac n Cheese Bites</span><span class="item-price">$6.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Onion Rings</span><span class="item-price">$6.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Hush Puppies</span><span class="item-price">$4.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Fried Plantains</span><span class="item-price">$4.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Fried Calamari</span><span class="item-price">$10.00</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SOUP & SALAD -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🥗</span> Soup &amp; Salad
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Soup of the Day</span><span class="item-price">$5.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Classic Salad</span><span class="item-price">$5.00</span></div>
+                    <span class="item-note">Romaine, tomatoes, croutons</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Grilled Chicken Salad</span><span class="item-price">$10.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Grilled Shrimp Salad</span><span class="item-price">$10.00</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PASTA -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🍝</span> Pasta
+            </div>
+            <div class="section-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Add extra shrimp or chicken for $5.00.
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Chicken Alfredo</span><span class="item-price">$9.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Cajun Shrimp Alfredo</span><span class="item-price">$10.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Shrimp Scampi</span><span class="item-price">$13.99</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Blackened Salmon Alfredo</span><span class="item-price">$18.99</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FISH & SHRIMP -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🍤</span> Fish &amp; Shrimp
+            </div>
+            <div class="section-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Served with French fries.
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Fish (6) &amp; Shrimp (6) Basket</span><span class="item-price">$13.95</span></div>
+                    <span class="item-note">Tilapia, Basa, or Catfish</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Fried Shrimp</span><span class="item-price">$13.00</span></div>
+                    <span class="item-variant">10 pieces</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Blackened Shrimp</span><span class="item-price">$13.00</span></div>
+                    <span class="item-variant">10 pieces</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FISH -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🐟</span> Fish
+            </div>
+            <div class="section-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Deep fried or blackened. Served with 2 sides.
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Salmon</span><span class="item-price">$16.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Grouper</span><span class="item-price">$17.95</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Tilapia</span><span class="item-price">$12.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Basa</span><span class="item-price">$12.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Catfish Nuggets</span><span class="item-price">$11.95</span></div>
+                    <span class="item-note">Deep fried only</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SANDWICHES -->
+        <div class="menu-section-block">
+            <div class="section-title">
+                <span class="section-icon">🥪</span> Sandwiches
+            </div>
+            <div class="section-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Includes lettuce, tomatoes, pickles, mayo, and fries.
+            </div>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Fish Sandwich</span><span class="item-price">$8.00</span></div>
+                    <span class="item-note">Tilapia, Basa, or Catfish</span>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Grouper Sandwich</span><span class="item-price">$12.00</span></div>
+                </div>
+                <div class="item-card">
+                    <div class="item-top"><span class="item-name">Chicken Sandwich</span><span class="item-price">$7.00</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- end tab-beverages -->
+
+</main>
+
+
+<!-- ── FOOTER ── -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-brand">
+            <img src="https://i.imgur.com/BHbBRHo.png" alt="New York Seafood Market" class="footer-logo">
+            <p>Fresh seafood, bold flavors, and a welcoming atmosphere since 2007.</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/menu">Menu</a></li>
+                <li><a href="/#hours">Hours</a></li>
+                <li><a href="/#reserve">Reservations</a></li>
+                <li><a href="/#location">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-contact">
+            <h4>Contact Us</h4>
+            <p>2801 34th St S<br>St. Petersburg, FL 33711</p>
+            <p><a href="tel:7278676666">(727) 867-6666</a></p>
+            <p><a href="mailto:nyseafoodmarket@gmail.com">nyseafoodmarket@gmail.com</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 New York Seafood Market &nbsp;|&nbsp; Est. 2007 &nbsp;|&nbsp; All Rights Reserved</p>
+    </div>
+</footer>
+
+<!-- ── BACK TO TOP ── -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"/>
+    </svg>
+</button>
+
+<script>
+    // ── HAMBURGER ──
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // ── TABS ──
+    const tabBtns   = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.menu-panel');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.dataset.tab;
+
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabPanels.forEach(p => p.classList.remove('active'));
+
+            btn.classList.add('active');
+            document.getElementById('tab-' + target).classList.add('active');
+
+            // Scroll to just below the tab bar
+            const tabBarBottom = document.getElementById('tabBarWrap').getBoundingClientRect().bottom + window.scrollY;
+            window.scrollTo({ top: tabBarBottom - 80, behavior: 'smooth' });
+        });
+    });
+
+    // ── BACK TO TOP ──
+    const backToTop = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ── HIGHLIGHT ACTIVE NAV LINK ──
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        if (link.getAttribute('href') === '/menu') {
+            link.style.background = 'var(--orange)';
+            link.style.color = 'var(--white)';
+        }
+    });
+
+    // ── URL HASH TAB ROUTING ──
+    // Allows linking directly to a tab e.g. /menu#chinese
+    const hashMap = {
+        '#seafood'    : 'seafood1',
+        '#crabtrays'  : 'crabtrays',
+        '#chinese'    : 'chinese',
+        '#beverages'  : 'beverages'
     };
 
-    window.addEventListener('resize', () => {
-      if (img.complete) {
-        const lowResWidth = 300;
-        const lowResHeight = 450;
-        const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = lowResWidth;
-        tempCanvas.height = lowResHeight;
-        const tempCtx = tempCanvas.getContext('2d');
-        tempCtx.filter = 'blur(0.5px)';
-        tempCtx.drawImage(img, 0, 0, lowResWidth, lowResHeight);
+    function activateTabFromHash() {
+        const hash = window.location.hash;
+        if (hash && hashMap[hash]) {
+            const targetTab = hashMap[hash];
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabPanels.forEach(p => p.classList.remove('active'));
+            document.querySelector(`[data-tab="${targetTab}"]`).classList.add('active');
+            document.getElementById('tab-' + targetTab).classList.add('active');
+        }
+    }
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        ctx.imageSmoothingEnabled = true;
-        ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
-      }
+    activateTabFromHash();
+    window.addEventListener('hashchange', activateTabFromHash);
+
+    // ── UPDATE HASH ON TAB CLICK ──
+    const reverseHashMap = {
+        'seafood1'   : '#seafood',
+        'crabtrays'  : '#crabtrays',
+        'chinese'    : '#chinese',
+        'beverages'  : '#beverages'
+    };
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const hash = reverseHashMap[btn.dataset.tab];
+            if (hash) {
+                history.replaceState(null, '', hash);
+            }
+        });
     });
-  </script>
+
+    // ── FADE IN CARDS ON SCROLL ──
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity    = '1';
+                entry.target.style.transform  = 'translateY(0)';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08 });
+
+    function observeCards() {
+        document.querySelectorAll('.menu-panel.active .item-card, .menu-panel.active .sauce-card, .menu-panel.active .bev-card, .menu-panel.active .combo-card').forEach((card, i) => {
+            card.style.opacity   = '0';
+            card.style.transform = 'translateY(16px)';
+            card.style.transition = `opacity 0.35s ease ${i * 0.03}s, transform 0.35s ease ${i * 0.03}s`;
+            observer.observe(card);
+        });
+    }
+
+    // Run on load
+    observeCards();
+
+    // Re-run when tab changes
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Small delay to let panel become visible first
+            setTimeout(observeCards, 50);
+        });
+    });
+
+</script>
 </body>
 </html>
