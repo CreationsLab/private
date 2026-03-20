@@ -136,36 +136,49 @@ nav {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 260px;
+    height: 280px;
     display: block;
+    z-index: 1;
+}
+
+.hero-scene {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 7rem 2rem 13rem;
+}
+
+.wheel-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 620px;
+    height: 620px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 1;
+}
+
+#shipWheel {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0.18;
+    filter: drop-shadow(0 0 40px rgba(255,179,0,0.15));
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
     text-align: center;
-    padding: 7rem 2rem 14rem;
-    max-width: 860px;
+    max-width: 780px;
     width: 100%;
-}
-
-.hero-logo {
-    width: 160px;
-    height: 160px;
-    margin: 0 auto 1.8rem;
-    animation: float 5s ease-in-out infinite;
-}
-
-.hero-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-12px); }
 }
 
 .hero h1 {
@@ -175,7 +188,7 @@ nav {
     color: var(--white);
     line-height: 1.15;
     margin-bottom: 0.6rem;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 16px rgba(0,0,0,0.5);
 }
 
 .hero h1 .highlight {
@@ -731,6 +744,11 @@ footer {
     .footer-brand {
         grid-column: 1 / -1;
     }
+
+    .wheel-wrap {
+        width: 480px;
+        height: 480px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -765,13 +783,13 @@ footer {
         font-size: 2rem;
     }
 
-    .hero-logo {
-        width: 120px;
-        height: 120px;
+    .hero-scene {
+        padding-bottom: 16rem;
     }
 
-    .hero-content {
-        padding-bottom: 16rem;
+    .wheel-wrap {
+        width: 340px;
+        height: 340px;
     }
 
     .section-header h2 {
@@ -829,9 +847,9 @@ footer {
         font-size: 1.6rem;
     }
 
-    .hero-logo {
-        width: 100px;
-        height: 100px;
+    .wheel-wrap {
+        width: 260px;
+        height: 260px;
     }
 
     .hero-buttons {
