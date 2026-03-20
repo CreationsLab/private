@@ -16,7 +16,6 @@
       display: block;
       width: 100vw;
       height: 100vh;
-      image-rendering: pixelated;
     }
   </style>
 </head>
@@ -30,36 +29,36 @@
     img.src = 'https://i.imgur.com/gyvzFPy.png';
 
     img.onload = () => {
-      const lowResWidth = 120;
-      const lowResHeight = 180;
+      const lowResWidth = 300;
+      const lowResHeight = 450;
       const tempCanvas = document.createElement('canvas');
       tempCanvas.width = lowResWidth;
       tempCanvas.height = lowResHeight;
       const tempCtx = tempCanvas.getContext('2d');
 
-      tempCtx.filter = 'grayscale(30%) blur(1px) contrast(80%)';
+      tempCtx.filter = 'blur(0.5px)';
       tempCtx.drawImage(img, 0, 0, lowResWidth, lowResHeight);
 
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      ctx.imageSmoothingEnabled = false;
+      ctx.imageSmoothingEnabled = true;
       ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
     };
 
     window.addEventListener('resize', () => {
       if (img.complete) {
-        const lowResWidth = 120;
-        const lowResHeight = 180;
+        const lowResWidth = 300;
+        const lowResHeight = 450;
         const tempCanvas = document.createElement('canvas');
         tempCanvas.width = lowResWidth;
         tempCanvas.height = lowResHeight;
         const tempCtx = tempCanvas.getContext('2d');
-        tempCtx.filter = 'grayscale(30%) blur(1px) contrast(80%)';
+        tempCtx.filter = 'blur(0.5px)';
         tempCtx.drawImage(img, 0, 0, lowResWidth, lowResHeight);
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        ctx.imageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = true;
         ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
       }
     });
