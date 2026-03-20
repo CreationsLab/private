@@ -1,1 +1,214 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New York Seafood Market | Take Out & Restaurant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="https://i.imgur.com/BHbBRHo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav id="navbar">
+    <div class="nav-container">
+        <a href="#hero" class="nav-logo">
+            <img src="https://i.imgur.com/BHbBRHo.png" alt="New York Seafood Market Logo">
+        </a>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#hours">Hours</a></li>
+            <li><a href="#location">Location</a></li>
+            <li><a href="#reserve" class="reserve-btn">Reserve</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="hero" id="hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-waves">
+        <svg class="wave1" viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#FFF8E1" d="M0,160L48,144C96,128,192,96,288,101.3C384,107,480,149,576,154.7C672,160,768,128,864,112C960,96,1056,96,1152,112C1248,128,1344,160,1392,176L1440,192L1440,200L0,200Z"/>
+        </svg>
+        <svg class="wave2" viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#FFF8E1" d="M0,128L60,138.7C120,149,240,171,360,165.3C480,160,600,128,720,122.7C840,117,960,139,1080,149.3C1200,160,1320,160,1380,160L1440,160L1440,200L0,200Z"/>
+        </svg>
+    </div>
+    <div class="hero-content">
+        <div class="hero-logo">
+            <img src="https://i.imgur.com/BHbBRHo.png" alt="New York Seafood Market">
+        </div>
+        <h1>Welcome to <span class="highlight">New York Seafood Market</span></h1>
+        <p class="hero-subtitle">Take Out & Restaurant</p>
+        <div class="hero-tagline">
+            <span>🦐 Seafood Boils</span>
+            <span>🥡 Chinese Food</span>
+            <span>🐟 Fried Fish</span>
+            <span>🍗 Wings</span>
+            <span>🍝 Pasta</span>
+            <span>✨ And More</span>
+        </div>
+        <div class="hero-buttons">
+            <a href="#about" class="btn btn-primary">What We Offer</a>
+            <a href="tel:7278676666" class="btn btn-secondary">📞 Call Us</a>
+        </div>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <div class="section-header">
+        <h2>What We Offer</h2>
+        <div class="underline"></div>
+        <p>Fresh flavors, bold dishes, and something for everyone at New York Seafood Market.</p>
+    </div>
+    <p class="about-text">
+        Serving <strong>St. Petersburg, FL</strong> since <strong>2007</strong>, we bring you the freshest seafood, authentic Chinese cuisine, crispy fried fish, flavorful wings, hearty pasta, and so much more. Whether you're dining in or grabbing takeout, every meal is made with care and quality ingredients.
+    </p>
+    <div class="about-grid">
+        <div class="about-card">
+            <div class="icon">🦀</div>
+            <h3>Seafood Boils</h3>
+            <p>Fresh crab, shrimp, crawfish and more tossed in our signature seasoning blends.</p>
+        </div>
+        <div class="about-card">
+            <div class="icon">🥡</div>
+            <h3>Chinese Food</h3>
+            <p>Classic Chinese dishes made fresh to order with authentic flavors.</p>
+        </div>
+        <div class="about-card">
+            <div class="icon">🐟</div>
+            <h3>Fried Fish</h3>
+            <p>Golden crispy fried fish prepared just the way you like it.</p>
+        </div>
+        <div class="about-card">
+            <div class="icon">🍗</div>
+            <h3>Wings</h3>
+            <p>Juicy wings tossed in a variety of sauces from mild to fire.</p>
+        </div>
+        <div class="about-card">
+            <div class="icon">🍝</div>
+            <h3>Pasta</h3>
+            <p>Rich and hearty pasta dishes made with fresh ingredients.</p>
+        </div>
+        <div class="about-card">
+            <div class="icon">✨</div>
+            <h3>And More</h3>
+            <p>Sides, drinks, desserts, and daily specials to keep you coming back.</p>
+        </div>
+    </div>
+</section>
+
+<section class="hours" id="hours">
+    <div class="section-header">
+        <h2>Opening Hours</h2>
+        <div class="underline"></div>
+        <p>Come visit us during any of our operating hours below.</p>
+    </div>
+    <div class="hours-table-wrapper">
+        <table class="hours-table">
+            <tr>
+                <td>Monday - Thursday</td>
+                <td>11:30 AM - 8:30 PM</td>
+            </tr>
+            <tr>
+                <td>Friday - Saturday</td>
+                <td>11:00 AM - 9:30 PM</td>
+            </tr>
+            <tr>
+                <td>Sunday</td>
+                <td>1:30 PM - 7:30 PM</td>
+            </tr>
+        </table>
+    </div>
+</section>
+
+<section class="reserve" id="reserve">
+    <div class="section-header">
+        <h2>Reserve a Table</h2>
+        <div class="underline"></div>
+        <p>Make a reservation for a special dining experience with us. Large groups welcome with advance notice.</p>
+    </div>
+    <div class="reserve-notice">
+        <span class="notice-icon">⚠️</span>
+        <p>We are currently accepting reservations for <strong>parties under 10 people only</strong> — until <strong>April 15</strong>. No exceptions.</p>
+    </div>
+    <div class="reserve-call">
+        <p>To make a reservation, give us a call:</p>
+        <a href="tel:7278676666" class="phone-number">(727) 867-6666</a>
+        <a href="tel:7278676666" class="btn btn-primary">📞 Call Now to Reserve</a>
+    </div>
+</section>
+
+<section class="location" id="location">
+    <div class="section-header">
+        <h2>Our Location</h2>
+        <div class="underline"></div>
+        <p>Come find us in St. Petersburg, Florida.</p>
+    </div>
+    <div class="location-grid">
+        <div class="location-info">
+            <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div>
+                    <h4>Address</h4>
+                    <p>2801 34th St S<br>St. Petersburg, FL 33711</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">📞</div>
+                <div>
+                    <h4>Phone</h4>
+                    <p><a href="tel:7278676666">(727) 867-6666</a></p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">📧</div>
+                <div>
+                    <h4>Email</h4>
+                    <p><a href="mailto:nyseafoodmarket@gmail.com">nyseafoodmarket@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="location-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.1!2d-82.6568!3d27.7321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2e1c8a1b1b1b1%3A0x0!2s2801+34th+St+S%2C+St.+Petersburg%2C+FL+33711!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-brand">
+            <img src="https://i.imgur.com/BHbBRHo.png" alt="New York Seafood Market" class="footer-logo">
+            <p>Fresh seafood, bold flavors, and a welcoming atmosphere since 2007.</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#hours">Hours</a></li>
+                <li><a href="#reserve">Reservations</a></li>
+                <li><a href="#location">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-contact">
+            <h4>Contact Us</h4>
+            <p>2801 34th St S<br>St. Petersburg, FL 33711</p>
+            <p><a href="tel:7278676666">(727) 867-6666</a></p>
+            <p><a href="mailto:nyseafoodmarket@gmail.com">nyseafoodmarket@gmail.com</a></p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 New York Seafood Market | Est. 2007 | All Rights Reserved</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
