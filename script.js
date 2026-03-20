@@ -46,14 +46,17 @@ const waves = [
 function drawWave(wave) {
     ctx.beginPath();
     ctx.moveTo(0, height);
+
     for (let x = 0; x <= width; x++) {
         const y = wave.yBase * height
             + Math.sin(x * wave.frequency + tick * wave.speed + wave.offset) * wave.amplitude
             + Math.sin(x * wave.frequency * 1.7 + tick * wave.speed * 0.6 + wave.offset + 1.2) * (wave.amplitude * 0.4);
         ctx.lineTo(x, y);
     }
+
     ctx.lineTo(width, height);
     ctx.closePath();
+
     const grad = ctx.createLinearGradient(0, 0, 0, height);
     grad.addColorStop(0, `rgba(21, 101, 192, ${wave.alpha})`);
     grad.addColorStop(1, `rgba(13, 71, 161, ${wave.alpha * 0.6})`);
@@ -72,29 +75,36 @@ animate();
 
 const heroContent = document.getElementById('heroContent');
 const wheelWrap = document.getElementById('wheelWrap');
+const shipWheel = document.getElementById('shipWheel');
 
 let rockTick = 0;
+let spinTick = 0;
 
 function rockAnimation() {
     rockTick += 0.008;
+    spinTick += 0.12; // wheel spins more
 
-    const contentRock = Math.sin(rockTick) * 1.8
-        + Math.sin(rockTick * 0.6 + 0.5) * 0.6;
+    // text rocks way less
+    const contentRock = Math.sin(rockTick) * 0.3
+        + Math.sin(rockTick * 0.6 + 0.5) * 0.1;
 
-    const contentBob = Math.sin(rockTick * 0.9 + 1.0) * 3
-        + Math.sin(rockTick * 0.4) * 1.5;
+    const contentBob = Math.sin(rockTick * 0.9 + 1.0) * 0.4
+        + Math.sin(rockTick * 0.4) * 0.2;
 
     heroContent.style.transform =
         `rotate(${contentRock}deg) translateY(${contentBob}px)`;
 
-    const wheelRock = Math.sin(rockTick * 0.7 + 0.3) * 2.5
-        + Math.sin(rockTick * 0.35 + 1.2) * 0.8;
+    // wheel rocks a little, but spins independently
+    const wheelRock = Math.sin(rockTick * 0.7 + 0.3) * 0.8
+        + Math.sin(rockTick * 0.35 + 1.2) * 0.25;
 
-    const wheelBob = Math.sin(rockTick * 0.8 + 0.8) * 4
-        + Math.sin(rockTick * 0.3 + 0.2) * 2;
+    const wheelBob = Math.sin(rockTick * 0.8 + 0.8) * 0.8
+        + Math.sin(rockTick * 0.3 + 0.2) * 0.3;
 
     wheelWrap.style.transform =
         `translate(-50%, -50%) rotate(${wheelRock}deg) translateY(${wheelBob}px)`;
+
+    shipWheel.style.transform = `rotate(${spinTick}deg)`;
 
     requestAnimationFrame(rockAnimation);
 }
