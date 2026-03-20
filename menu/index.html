@@ -1,49 +1,66 @@
-<!-- 06:30:28pm Eastern -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Menu</title>
   <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 20px;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
       background: #f5f5f5;
     }
     canvas {
-      border: 1px solid #ccc;
-      margin-top: 20px;
-      width: 400px; /* force smaller display */
-      image-rendering: pixelated; /* makes it look low quality */
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      image-rendering: pixelated;
     }
   </style>
 </head>
 <body>
-  <h1>Our Menu (Blurry Edition)</h1>
-  <canvas id="pdf-canvas"></canvas>
-
-  <!-- PDF.js library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.12.313/pdf.min.js"></script>
+  <canvas id="menu-canvas"></canvas>
   <script>
-    const url = 'menu.pdf'; // your PDF file
-    const canvas = document.getElementById('pdf-canvas');
+    const canvas = document.getElementById('menu-canvas');
     const ctx = canvas.getContext('2d');
 
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.12.313/pdf.worker.min.js';
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = 'https://i.imgur.com/gyvzFPy.png';
 
-    pdfjsLib.getDocument(url).promise.then(pdf => {
-      pdf.getPage(1).then(page => {
-        const viewport = page.getViewport({ scale: 0.5 }); // small scale = low quality
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
+    img.onload = () => {
+      const lowResWidth = 100;
+      const lowResHeight = 150;
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = lowResWidth;
+      tempCanvas.height = lowResHeight;
+      const tempCtx = tempCanvas.getContext('2d');
 
-        const renderContext = {
-          canvasContext: ctx,
-          viewport: viewport,
-        };
-        page.render(renderContext);
-      });
+      tempCtx.drawImage(img, 0, 0, lowResWidth, lowResHeight);
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
+    };
+
+    window.addEventListener('resize', () => {
+      if (img.complete) {
+        const lowResWidth = 100;
+        const lowResHeight = 150;
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = lowResWidth;
+        tempCanvas.height = lowResHeight;
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCtx.drawImage(img, 0, 0, lowResWidth, lowResHeight);
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
+      }
     });
   </script>
 </body>
