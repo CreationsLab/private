@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New York Seafood Market | Take Out & Restaurant</title>
+    <title>New York Seafood Market | St. Petersburg, FL</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="https://i.imgur.com/BHbBRHo.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
 <nav id="navbar">
     <div class="nav-container">
         <a href="#hero" class="nav-logo">
-            <img src="https://i.imgur.com/BHbBRHo.png" alt="New York Seafood Market Logo">
+            <img src="https://i.imgur.com/BHbBRHo.png" alt="New York Seafood Market">
         </a>
         <div class="hamburger" id="hamburger">
             <span></span>
@@ -32,63 +32,34 @@
 </nav>
 
 <section class="hero" id="hero">
-    <div class="hero-bg-pattern"></div>
-    <div class="hero-waves">
-        <svg class="wave1" viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#FFF8E1" d="M0,160L48,144C96,128,192,96,288,101.3C384,107,480,149,576,154.7C672,160,768,128,864,112C960,96,1056,96,1152,112C1248,128,1344,160,1392,176L1440,192L1440,200L0,200Z"/>
-        </svg>
-        <svg class="wave2" viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#FFF8E1" d="M0,128L60,138.7C120,149,240,171,360,165.3C480,160,600,128,720,122.7C840,117,960,139,1080,149.3C1200,160,1320,160,1380,160L1440,160L1440,200L0,200Z"/>
-        </svg>
-    </div>
+    <canvas id="waveCanvas"></canvas>
     <div class="hero-content">
         <div class="hero-logo">
             <img src="https://i.imgur.com/BHbBRHo.png" alt="New York Seafood Market">
         </div>
-        <h1>Welcome to <span class="highlight">New York Seafood Market</span></h1>
-        <p class="hero-subtitle">Take Out & Restaurant</p>
+        <h1>Welcome to<span class="highlight">New York Seafood Market</span></h1>
+        <p class="hero-subtitle">Take Out &amp; Restaurant · Est. 2007</p>
         <div class="hero-tagline">
-            <span>
-                <svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/></svg>
-                Seafood Boils
-            </span>
-            <span>
-                <svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
-                Chinese Food
-            </span>
-            <span>
-                <svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12C2 7 7 2 12 2s10 5 10 10-5 10-10 10S2 17 2 12z"/><path d="M16 12c-1-2-3-3-4-3s-3 1-4 3"/></svg>
-                Fried Fish
-            </span>
-            <span>
-                <svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15 8H9L12 2z"/><circle cx="12" cy="14" r="6"/></svg>
-                Wings
-            </span>
-            <span>
-                <svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18C4 18 6 14 12 14s8 4 8 4"/><ellipse cx="12" cy="10" rx="8" ry="4"/></svg>
-                Pasta
-            </span>
-            <span>
-                <svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
-                And More
-            </span>
+            <span>Seafood Boils</span>
+            <span>Chinese Food</span>
+            <span>Fried Fish</span>
+            <span>Wings</span>
+            <span>Pasta</span>
+            <span>And More</span>
         </div>
         <div class="hero-buttons">
             <a href="#about" class="btn btn-primary">What We Offer</a>
-            <a href="tel:7278676666" class="btn btn-secondary">
-                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                Call Us
-            </a>
+            <a href="tel:7278676666" class="btn btn-secondary">Call Us</a>
         </div>
         <div class="hero-rating">
             <div class="stars">
-                <svg viewBox="0 0 24 24" fill="#FFB300"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg viewBox="0 0 24 24" fill="#FFB300"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg viewBox="0 0 24 24" fill="#FFB300"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg viewBox="0 0 24 24" fill="#FFB300"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg viewBox="0 0 24 24" fill="#FFB300"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" opacity="0.6"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg viewBox="0 0 24 24" class="half-star"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             </div>
-            <span class="rating-text">4.6 stars · 520 reviews on Google</span>
+            <span>4.6 &nbsp;·&nbsp; 520 Google Reviews</span>
         </div>
     </div>
 </section>
@@ -97,90 +68,50 @@
     <div class="section-header">
         <h2>What We Offer</h2>
         <div class="underline"></div>
-        <p>Fresh flavors, bold dishes, and something for everyone.</p>
+        <p>Fresh flavors and bold dishes for everyone at New York Seafood Market.</p>
     </div>
     <p class="about-text">
         Serving <strong>St. Petersburg, FL</strong> since <strong>2007</strong>, we bring you the freshest seafood, authentic Chinese cuisine, crispy fried fish, flavorful wings, hearty pasta, and so much more. Whether you're dining in or grabbing takeout, every meal is made with care.
     </p>
     <div class="about-grid">
         <div class="about-card">
-            <div class="icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M32 8c-8 0-20 6-20 24h40c0-18-12-24-20-24z"/>
-                    <path d="M12 32c0 8 4 16 10 20h20c6-4 10-12 10-20"/>
-                    <line x1="32" y1="8" x2="32" y2="2"/>
-                    <path d="M28 2c2 3 6 3 8 0"/>
-                    <line x1="20" y1="38" x2="44" y2="38"/>
-                    <line x1="18" y1="44" x2="46" y2="44"/>
-                </svg>
+            <div class="icon-circle">
+                <img src="https://i.imgur.com/ChBRf1g.png" alt="Seafood Boils">
             </div>
             <h3>Seafood Boils</h3>
-            <p>Fresh crab, shrimp, crawfish and more tossed in our signature seasoning.</p>
+            <p>Fresh crab, shrimp, crawfish and more in our signature seasoning.</p>
         </div>
         <div class="about-card">
-            <div class="icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="16" y="12" width="32" height="40" rx="4"/>
-                    <line x1="16" y1="20" x2="48" y2="20"/>
-                    <line x1="24" y1="28" x2="40" y2="28"/>
-                    <line x1="24" y1="34" x2="36" y2="34"/>
-                    <line x1="24" y1="40" x2="40" y2="40"/>
-                    <path d="M36 12V6h-8v6"/>
-                </svg>
+            <div class="icon-circle">
+                <img src="https://i.imgur.com/vjl4iLy.png" alt="Chinese Food">
             </div>
             <h3>Chinese Food</h3>
             <p>Classic Chinese dishes made fresh to order with authentic flavors.</p>
         </div>
         <div class="about-card">
-            <div class="icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <ellipse cx="32" cy="36" rx="22" ry="10"/>
-                    <path d="M10 36c0 8 10 16 22 16s22-8 22-16"/>
-                    <path d="M20 30c4-14 20-18 26-10"/>
-                    <circle cx="24" cy="28" r="1.5" fill="#fff"/>
-                    <path d="M48 32l6-4"/>
-                    <path d="M50 28l4 2"/>
-                </svg>
+            <div class="icon-circle">
+                <img src="https://i.imgur.com/yCxXIIM.png" alt="Fried Fish">
             </div>
             <h3>Fried Fish</h3>
             <p>Golden crispy fried fish prepared just the way you like it.</p>
         </div>
         <div class="about-card">
-            <div class="icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 52l6-20c2-6 8-12 14-14l4-2-2 4c-2 6-8 12-14 14l-20 6z"/>
-                    <path d="M38 18c4-4 10-8 14-8-2 6-4 10-8 14"/>
-                    <circle cx="36" cy="26" r="3"/>
-                </svg>
+            <div class="icon-circle">
+                <img src="https://i.imgur.com/mTa7F0l.png" alt="Wings">
             </div>
             <h3>Wings</h3>
-            <p>Juicy wings tossed in a variety of sauces from mild to fire.</p>
+            <p>Juicy wings tossed in sauces ranging from mild to fire.</p>
         </div>
         <div class="about-card">
-            <div class="icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <ellipse cx="32" cy="44" rx="20" ry="8"/>
-                    <path d="M12 44v4c0 4.4 8.95 8 20 8s20-3.6 20-8v-4"/>
-                    <path d="M18 38c0-10 6-22 14-22s14 12 14 22"/>
-                    <path d="M22 36c2-4 6-4 10-2s8 0 10-2"/>
-                </svg>
+            <div class="icon-circle">
+                <img src="https://i.imgur.com/bBgdjdb.png" alt="Pasta">
             </div>
             <h3>Pasta</h3>
             <p>Rich and hearty pasta dishes made with fresh ingredients.</p>
         </div>
         <div class="about-card">
-            <div class="icon">
-                <svg viewBox="0 0 64 64" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="32" cy="32" r="20"/>
-                    <line x1="32" y1="12" x2="32" y2="20"/>
-                    <line x1="32" y1="44" x2="32" y2="52"/>
-                    <line x1="12" y1="32" x2="20" y2="32"/>
-                    <line x1="44" y1="32" x2="52" y2="32"/>
-                    <line x1="17" y1="17" x2="23" y2="23"/>
-                    <line x1="41" y1="41" x2="47" y2="47"/>
-                    <line x1="47" y1="17" x2="41" y2="23"/>
-                    <line x1="23" y1="41" x2="17" y2="47"/>
-                </svg>
+            <div class="icon-circle icon-circle--more">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
             </div>
             <h3>And More</h3>
             <p>Sides, drinks, desserts, and daily specials to keep you coming back.</p>
@@ -189,23 +120,10 @@
 </section>
 
 <section class="menu-section" id="menu-section">
-    <div class="menu-section-inner">
-        <div class="menu-icon-wrap">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="10" y="6" width="44" height="52" rx="4"/>
-                <line x1="18" y1="16" x2="46" y2="16"/>
-                <line x1="18" y1="24" x2="40" y2="24"/>
-                <line x1="18" y1="32" x2="46" y2="32"/>
-                <line x1="18" y1="40" x2="36" y2="40"/>
-                <line x1="18" y1="48" x2="42" y2="48"/>
-            </svg>
-        </div>
+    <div class="menu-inner">
         <h2>View Our Entire Menu</h2>
-        <p>Check out everything we have to offer — from seafood boils and fried fish to Chinese food, wings, pasta, and more.</p>
-        <a href="/menu/index.html" class="btn btn-primary">
-            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            See Full Menu
-        </a>
+        <p>Check out everything we have — seafood boils, fried fish, Chinese food, wings, pasta, and more.</p>
+        <a href="/menu/index.html" class="btn btn-primary">See Full Menu</a>
     </div>
 </section>
 
@@ -213,21 +131,21 @@
     <div class="section-header">
         <h2>Opening Hours</h2>
         <div class="underline"></div>
-        <p>Come visit us during any of our operating hours below.</p>
+        <p>Come visit us during any of our operating hours.</p>
     </div>
-    <div class="hours-table-wrapper">
+    <div class="hours-wrap">
         <table class="hours-table">
             <tr>
-                <td>Monday - Thursday</td>
-                <td>11:30 AM - 8:30 PM</td>
+                <td>Monday – Thursday</td>
+                <td>11:30 AM – 8:30 PM</td>
             </tr>
             <tr>
-                <td>Friday - Saturday</td>
-                <td>11:00 AM - 9:30 PM</td>
+                <td>Friday – Saturday</td>
+                <td>11:00 AM – 9:30 PM</td>
             </tr>
             <tr>
                 <td>Sunday</td>
-                <td>1:30 PM - 7:30 PM</td>
+                <td>1:30 PM – 7:30 PM</td>
             </tr>
         </table>
     </div>
@@ -237,19 +155,16 @@
     <div class="section-header">
         <h2>Reserve a Table</h2>
         <div class="underline"></div>
-        <p>Make a reservation for a special dining experience with us. Large groups welcome with advance notice.</p>
+        <p>Make a reservation for a special dining experience. Large groups welcome with advance notice.</p>
     </div>
     <div class="reserve-notice">
-        <svg class="notice-svg" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        <p>We are currently accepting reservations for <strong>parties under 10 people only</strong> — until <strong>April 15</strong>. No exceptions.</p>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <p>Reservations are currently for <strong>parties under 10 only</strong> until <strong>April 15</strong>. No exceptions.</p>
     </div>
     <div class="reserve-call">
-        <p>To make a reservation, give us a call:</p>
-        <a href="tel:7278676666" class="phone-number">(727) 867-6666</a>
-        <a href="tel:7278676666" class="btn btn-primary">
-            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            Call Now to Reserve
-        </a>
+        <p>Call us to book your table:</p>
+        <a href="tel:7278676666" class="phone-link">(727) 867-6666</a>
+        <a href="tel:7278676666" class="btn btn-primary">Call Now to Reserve</a>
     </div>
 </section>
 
@@ -257,13 +172,13 @@
     <div class="section-header">
         <h2>Our Location</h2>
         <div class="underline"></div>
-        <p>Come find us in St. Petersburg, Florida.</p>
+        <p>Find us in St. Petersburg, Florida.</p>
     </div>
     <div class="location-grid">
         <div class="location-info">
             <div class="info-item">
                 <div class="info-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                 </div>
                 <div>
                     <h4>Address</h4>
@@ -272,7 +187,7 @@
             </div>
             <div class="info-item">
                 <div class="info-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
                 </div>
                 <div>
                     <h4>Phone</h4>
@@ -281,7 +196,7 @@
             </div>
             <div class="info-item">
                 <div class="info-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                 </div>
                 <div>
                     <h4>Email</h4>
@@ -290,7 +205,7 @@
             </div>
             <div class="info-item">
                 <div class="info-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="12" x2="16" y2="14"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 </div>
                 <div>
                     <h4>Services</h4>
@@ -299,7 +214,7 @@
             </div>
             <div class="info-item">
                 <div class="info-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
                 </div>
                 <div>
                     <h4>Price Range</h4>
@@ -308,7 +223,15 @@
             </div>
         </div>
         <div class="location-map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.8!2d-82.6568!3d27.7321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2e1646ee9a41d%3A0x2b7a8c2e8e5f8a0a!2sNew%20York%20Seafood%20Restaurant!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.8!2d-82.6568!3d27.7321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c2e1646ee9a41d%3A0x2b7a8c2e8e5f8a0a!2sNew%20York%20Seafood%20Restaurant!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
         </div>
     </div>
 </section>
@@ -338,7 +261,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2025 New York Seafood Market | Est. 2007 | All Rights Reserved</p>
+        <p>&copy; 2025 New York Seafood Market &nbsp;|&nbsp; Est. 2007 &nbsp;|&nbsp; All Rights Reserved</p>
     </div>
 </footer>
 
