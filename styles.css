@@ -529,6 +529,31 @@ section {
     text-align: right;
 }
 
+.view-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    margin-top: 0.6rem;
+
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0.75;
+}
+
+.view-counter .eye {
+    font-size: 0.95rem;
+    filter: brightness(0) invert(1); /* forces white look across devices */
+}
+
+.view-counter .views-label {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+}
+
 .reserve {
     background: var(--cream);
     text-align: center;
