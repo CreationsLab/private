@@ -121,3 +121,51 @@ document.querySelectorAll('.about-card, .info-item').forEach(function (el) {
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(el);
 });
+
+// TYPEWRITER EFFECT
+const phrases = [
+    "New York Seafood Market",
+    "Seafood Boils",
+    "Crab Trays",
+    "Chinese Food",
+    "Fried Fish",
+    "Wings",
+    "Pasta",
+    "Beverages"
+];
+
+const typeEl = document.getElementById("typeText");
+
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function typeEffect() {
+    if (!typeEl) return; // safety check
+
+    const current = phrases[phraseIndex];
+
+    if (isDeleting) {
+        typeEl.textContent = current.substring(0, charIndex--);
+    } else {
+        typeEl.textContent = current.substring(0, charIndex++);
+    }
+
+    let speed = isDeleting ? 40 : 70;
+
+    if (!isDeleting && charIndex === current.length) {
+        speed = 1400; // pause at full word
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        speed = 300;
+    }
+
+    setTimeout(typeEffect, speed);
+}
+
+// start AFTER everything loads (important for your animations)
+window.addEventListener("load", () => {
+    setTimeout(typeEffect, 500);
+});
