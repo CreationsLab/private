@@ -181,12 +181,6 @@ nav {
     width: 100%;
 }
 
-.hero-tagline a {
-    text-decoration: none;
-    color: inherit;
-    cursor: pointer;
-}
-
 .hero-tagline a:hover {
     text-decoration: underline;
 }
@@ -223,19 +217,25 @@ nav {
     margin-bottom: 2.2rem;
 }
 
-.hero-tagline span {
+.hero-tagline a {
+    text-decoration: none;
+    color: rgba(255,248,225,0.9);
+    cursor: pointer;
+
     background: rgba(255,255,255,0.07);
     border: 1px solid rgba(255,255,255,0.15);
-    color: rgba(255,248,225,0.9);
     padding: 0.4rem 1rem;
     border-radius: 4px;
+
     font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.5px;
+
     transition: all 0.25s ease;
+    display: inline-block;
 }
 
-.hero-tagline span:hover {
+.hero-tagline a:hover {
     background: var(--orange);
     border-color: var(--orange);
     transform: translateY(-2px);
