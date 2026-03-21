@@ -249,6 +249,16 @@ nav {
     margin-bottom: 1.8rem;
 }
 
+#typeText::after {
+    content: "|";
+    margin-left: 4px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
 .btn {
     display: inline-flex;
     align-items: center;
