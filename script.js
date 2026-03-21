@@ -122,16 +122,16 @@ document.querySelectorAll('.about-card, .info-item').forEach(function (el) {
     observer.observe(el);
 });
 
-// TYPEWRITER EFFECT WITH PREFIX AND LONG STAY FOR MAIN PHRASE
+// TYPEWRITER EFFECT WITH DYNAMIC PREFIX FIXED
 const phrases = [
-    { text: "New York Seafood Market", prefix: "", stay: 3000 }, // main phrase stays longer
-    { text: "Seafood Boils", prefix: "Welcome to ", stay: 1500 },
-    { text: "Crab Trays", prefix: "Welcome to ", stay: 1500 },
-    { text: "Chinese Food", prefix: "Welcome to ", stay: 1500 },
-    { text: "Fried Fish", prefix: "Welcome to ", stay: 1500 },
-    { text: "Wings", prefix: "Welcome to ", stay: 1500 },
-    { text: "Pasta", prefix: "Welcome to ", stay: 1500 },
-    { text: "Beverages", prefix: "Welcome to ", stay: 1500 }
+    { text: "New York Seafood Market", stay: 3000 }, // main phrase
+    { text: "Seafood Boils", stay: 1500 },
+    { text: "Crab Trays", stay: 1500 },
+    { text: "Chinese Food", stay: 1500 },
+    { text: "Fried Fish", stay: 1500 },
+    { text: "Wings", stay: 1500 },
+    { text: "Pasta", stay: 1500 },
+    { text: "Beverages", stay: 1500 }
 ];
 
 const typeEl = document.getElementById("typeText");
@@ -145,24 +145,32 @@ if (typeEl && prefixEl) {
     function typeEffect() {
         const current = phrases[phraseIndex];
 
-        prefixEl.textContent = current.prefix; // dynamic prefix
+        // Dynamic prefix
+        prefixEl.textContent = (current.text === "New York Seafood Market") ? "Welcome to " : "Try our ";
 
+        // Type or delete characters
         if (isDeleting) {
-            typeEl.textContent = current.text.substring(0, charIndex--);
+            typeEl.textContent = current.text.substring(0, charIndex);
+            charIndex--;
         } else {
-            typeEl.textContent = current.text.substring(0, charIndex++);
+            charIndex++;
+            typeEl.textContent = current.text.substring(0, charIndex);
         }
 
+        // Speed settings
         let speed = isDeleting ? 40 : 70;
 
+        // Pause at full phrase
         if (!isDeleting && charIndex === current.text.length) {
-            speed = current.stay; // stay longer for full phrase
+            speed = current.stay; // pause longer on main phrase
             isDeleting = true;
-        } else if (isDeleting && charIndex < 0) { // fixed to allow deletion
+        }
+        // Move to next phrase after deleting
+        else if (isDeleting && charIndex < 0) {
             isDeleting = false;
-            charIndex = 0;
             phraseIndex = (phraseIndex + 1) % phrases.length;
-            speed = 300;
+            charIndex = 0; // reset for next phrase
+            speed = 300; // short pause before typing next
         }
 
         setTimeout(typeEffect, speed);
