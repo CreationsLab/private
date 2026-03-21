@@ -124,7 +124,7 @@ document.querySelectorAll('.about-card, .info-item').forEach(function (el) {
 
 // TYPEWRITER EFFECT WITH PREFIX AND LONG STAY FOR MAIN PHRASE
 const phrases = [
-    { text: "New York Seafood Market", prefix: "", stay: 3000 }, // main name stays longer
+    { text: "New York Seafood Market", prefix: "", stay: 3000 }, // main phrase stays longer
     { text: "Seafood Boils", prefix: "Welcome to ", stay: 1500 },
     { text: "Crab Trays", prefix: "Welcome to ", stay: 1500 },
     { text: "Chinese Food", prefix: "Welcome to ", stay: 1500 },
@@ -156,10 +156,11 @@ if (typeEl && prefixEl) {
         let speed = isDeleting ? 40 : 70;
 
         if (!isDeleting && charIndex === current.text.length) {
-            speed = current.stay; // stay longer for main phrase
+            speed = current.stay; // stay longer for full phrase
             isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
+        } else if (isDeleting && charIndex < 0) { // fixed to allow deletion
             isDeleting = false;
+            charIndex = 0;
             phraseIndex = (phraseIndex + 1) % phrases.length;
             speed = 300;
         }
@@ -169,4 +170,3 @@ if (typeEl && prefixEl) {
 
     window.addEventListener("load", () => setTimeout(typeEffect, 500));
 }
-});
