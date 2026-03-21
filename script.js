@@ -122,50 +122,51 @@ document.querySelectorAll('.about-card, .info-item').forEach(function (el) {
     observer.observe(el);
 });
 
-// TYPEWRITER EFFECT
+// TYPEWRITER EFFECT WITH PREFIX AND LONG STAY FOR MAIN PHRASE
 const phrases = [
-    "New York Seafood Market",
-    "Seafood Boils",
-    "Crab Trays",
-    "Chinese Food",
-    "Fried Fish",
-    "Wings",
-    "Pasta",
-    "Beverages"
+    { text: "New York Seafood Market", prefix: "", stay: 3000 }, // main name stays longer
+    { text: "Seafood Boils", prefix: "Welcome to ", stay: 1500 },
+    { text: "Crab Trays", prefix: "Welcome to ", stay: 1500 },
+    { text: "Chinese Food", prefix: "Welcome to ", stay: 1500 },
+    { text: "Fried Fish", prefix: "Welcome to ", stay: 1500 },
+    { text: "Wings", prefix: "Welcome to ", stay: 1500 },
+    { text: "Pasta", prefix: "Welcome to ", stay: 1500 },
+    { text: "Beverages", prefix: "Welcome to ", stay: 1500 }
 ];
 
 const typeEl = document.getElementById("typeText");
+const prefixEl = document.getElementById("typePrefix");
 
-let phraseIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
+if (typeEl && prefixEl) {
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
 
-function typeEffect() {
-    if (!typeEl) return; // safety check
+    function typeEffect() {
+        const current = phrases[phraseIndex];
 
-    const current = phrases[phraseIndex];
+        prefixEl.textContent = current.prefix; // dynamic prefix
 
-    if (isDeleting) {
-        typeEl.textContent = current.substring(0, charIndex--);
-    } else {
-        typeEl.textContent = current.substring(0, charIndex++);
+        if (isDeleting) {
+            typeEl.textContent = current.text.substring(0, charIndex--);
+        } else {
+            typeEl.textContent = current.text.substring(0, charIndex++);
+        }
+
+        let speed = isDeleting ? 40 : 70;
+
+        if (!isDeleting && charIndex === current.text.length) {
+            speed = current.stay; // stay longer for main phrase
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            speed = 300;
+        }
+
+        setTimeout(typeEffect, speed);
     }
 
-    let speed = isDeleting ? 40 : 70;
-
-    if (!isDeleting && charIndex === current.length) {
-        speed = 1400; // pause at full word
-        isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        phraseIndex = (phraseIndex + 1) % phrases.length;
-        speed = 300;
-    }
-
-    setTimeout(typeEffect, speed);
+    window.addEventListener("load", () => setTimeout(typeEffect, 500));
 }
-
-// start AFTER everything loads (important for your animations)
-window.addEventListener("load", () => {
-    setTimeout(typeEffect, 500);
 });
